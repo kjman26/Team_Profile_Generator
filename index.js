@@ -42,7 +42,70 @@ const firstPrompt = () => {
 })
 
 const addManager = () => {
-    
+    return inquirer.prompt ([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Add MANAGER name',
+            validate: managerName => {
+                if (managerName) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Add MANAGER ID',
+            validate: managerId => {
+                if (managerId) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Add MANAGER EMAIL',
+            validate: managerEmail => {
+                if (managerEmail) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'officeNum',
+            message: 'Add MANAGER OFFICE NUMBER',
+            validate: managerOfficeNum => {
+                if (managerOfficeNum) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        }
+
+    ])
+    .then(answers => {
+        const manager = new Manager (answers.name, answers.id, answers.email, answers.managerOfficeNum);
+        teamMembers.push(manager);
+        promptInquirer();
+    })
+};
+
+const addEngineer = () => {
+    inquirer.prompt([
+        {
+            
+        }
+    ])
 }
 
 const writeFile = (data) => {
