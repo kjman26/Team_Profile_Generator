@@ -40,7 +40,7 @@ const firstPrompt = () => {
     }
     console.log(ans)
 })
-
+//add manager functions with prompts
 const addManager = () => {
     return inquirer.prompt ([
         {
@@ -99,14 +99,124 @@ const addManager = () => {
         promptInquirer();
     })
 };
-
+//engineer builder with prompts
 const addEngineer = () => {
     inquirer.prompt([
         {
-            
+            type: 'input',
+            name: 'name',
+            message: 'Add Engineer NAME',
+            validate: engineerName => {
+                if (engineerName) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Add Engineer ID',
+            validate: engineerID => {
+                if (engineerID) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Add Engineer EMAIL',
+            validate: engineerEmail => {
+                if (engineerEmail) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: 'Add Engineer GITHUB',
+            validate: engineerGithub => {
+                if (engineerGithub) {
+                    return true;
+                } else{
+                    return false
+                };
+            }
+        },
+    ])
+        .then(answers => {
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            teamMembers.push(engineer);
+            promptInquirer()
+        })
+};
+//add intern function
+
+const addIntern = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your interns name?',
+            validate: internName => {
+                if (internName){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your Interns ID?',
+            validate: internId => {
+                if (internId) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your Interns EMAIL?',
+            validate: internEmail => {
+                if (internEmail){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: 'What SCHOOL did your Intern attend?',
+            validate: internSchool => {
+                if (internSchool){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
     ])
-}
+        .then(answers => {
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            teamMembers.push(intern);
+            promptInquirer();
+        })
+};
+
 
 const writeFile = (data) => {
     fs.writeFile('./theTeam.html', data, (err) =>
@@ -115,3 +225,4 @@ const writeFile = (data) => {
 
 writeFile();
 
+//need to initialize and figure out if writefile goes in index or generatehtml
