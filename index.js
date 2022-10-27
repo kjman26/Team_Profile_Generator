@@ -222,7 +222,7 @@ const addIntern = () => {
 };
 
 const writeFile = (data) => {
-    fs.writeFile('./theTeam.html', data, (err) =>
+    fs.writeFile('./theTest.html', data, (err) =>
         err ? console.error(err) : console.log('File successfully written!'))
 };
 
