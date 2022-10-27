@@ -12,9 +12,9 @@ module.exports = teamMembers;
 //create a prompt that asks for user input and then takes that input and exports to generateHtml, run through the functions with user created parameters (aka user input) and then import from generatehtml
 
 const firstPrompt = () => {
-    inquirer.prompt([
+    inquirer
+        .prompt([
     {
-         
         message: "How would you like to proceed?",
         type: "list",
         choices: ['add Manager', 'add Engineer', 'add Intern', 'I am done'],
@@ -38,11 +38,12 @@ const firstPrompt = () => {
             console.log('team built!')
 
     }
-    console.log(ans)
+    console.log(teamMembers)
 })
 //add manager functions with prompts
 const addManager = () => {
-    return inquirer.prompt ([
+     return inquirer
+     .prompt ([
         {
             type: 'input',
             name: 'name',
@@ -52,7 +53,7 @@ const addManager = () => {
                     return true;
                 } else{
                     return false
-                };
+                }
             }
         },
         {
@@ -64,7 +65,7 @@ const addManager = () => {
                     return true;
                 } else{
                     return false
-                };
+                }
             }
         },
         {
@@ -77,7 +78,7 @@ const addManager = () => {
                 } else{
                     return false
                 };
-            }
+            },
         },
         {
             type: 'input',
@@ -88,7 +89,7 @@ const addManager = () => {
                     return true;
                 } else{
                     return false
-                };
+                }
             }
         }
 
@@ -96,23 +97,24 @@ const addManager = () => {
     .then(answers => {
         const manager = new Manager (answers.name, answers.id, answers.email, answers.managerOfficeNum);
         teamMembers.push(manager);
-        promptInquirer();
+        firstPrompt();
     })
 };
 //engineer builder with prompts
 const addEngineer = () => {
-    inquirer.prompt([
+    inquirer
+    .prompt([
         {
             type: 'input',
             name: 'name',
             message: 'Add Engineer NAME',
-            validate: engineerName => {
-                if (engineerName) {
-                    return true;
-                } else{
-                    return false
-                };
-            }
+            // validate: engineerName => {
+            //     if (engineerName) {
+            //         return true;
+            //     } else{
+            //         return false
+            //     };
+            // }
         },
         {
             type: 'input',
@@ -154,13 +156,14 @@ const addEngineer = () => {
         .then(answers => {
             const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
             teamMembers.push(engineer);
-            promptInquirer()
+            firstPrompt();
         })
 };
 //add intern function
 
 const addIntern = () => {
-    return inquirer.prompt([
+    return inquirer
+    .prompt([
         {
             type: 'input',
             name: 'name',
@@ -213,16 +216,20 @@ const addIntern = () => {
         .then(answers => {
             const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
             teamMembers.push(intern);
-            promptInquirer();
+            firstPrompt();
         })
 };
-
+};
 
 const writeFile = (data) => {
     fs.writeFile('./theTeam.html', data, (err) =>
         err ? console.error(err) : console.log('File successfully written!'))
 };
 
-writeFile();
+function initialize(){
+    firstPrompt();
+}
+
+initialize();
 
 //need to initialize and figure out if writefile goes in index or generatehtml

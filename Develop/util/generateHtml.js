@@ -1,9 +1,9 @@
 // create the team
-const inquirer = require("inquirer");
-const Manager = require('../lib/Manager');
-const Intern = require('../lib/Intern');
-const Engineer = require('../lib/Engineer');
-const Employee = require('../lib/Employee');
+// const inquirer = require("inquirer");
+// const Manager = require('./');
+// const Intern = require('../lib/Intern');
+// const Engineer = require('../lib/Engineer');
+// const Employee = require('../lib/Employee');
 const teamMembers = [];
 
 
@@ -41,7 +41,7 @@ const generateTeam = team => {
         <ul class="list-group">
             <li class="list-group-item">ID: ${Engineer.getId()}</li>
             <li class="list-group-item">Email: <a href="mailto:${Engineer.getEmail()}">${Engineer.getEmail()}</a></li>
-            <li class="list-group-item">GitHub: <a href="https://github.com/${Engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${Engineer.getGithub()}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${Engineer.getGitHub()}" target="_blank" rel="noopener noreferrer">${Engineer.getGitHub()}</a></li>
         </ul>
     </div>
 </div>
@@ -68,7 +68,11 @@ const generateTeam = team => {
     };
 
     const html = [];
-
+    html.push(team
+        .filter(employee => employee.getRole() === "Employee")
+        .map(Employee => generateEmployee(Employee))
+        .join("")
+    );
     html.push(team
         .filter(employee => employee.getRole() === "Manager")
         .map(Manager => generateManager(Manager))
